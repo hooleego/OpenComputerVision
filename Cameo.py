@@ -1,5 +1,6 @@
 import cv2
 from Managers import CaptureManager, WindowManager
+import Filters
 
 
 class Cameo(object):
@@ -8,6 +9,7 @@ class Cameo(object):
         self.__capture = cv2.VideoCapture(videoSource)
         self.__captureManager = CaptureManager(self.__capture, self.__windowManager, True)
         self.__leftButtonClicked = False
+        self.__curveFilter = Filters.BlurFilter()
 
     def run(self):
         """ Run the main loop """
@@ -19,6 +21,8 @@ class Cameo(object):
             else:
                 self.__captureManager.enterFrame()
                 frame = self.__captureManager.frame
+                Filters.strokeEdges(frame, frame)
+                self.__curveFilter.apply(frame, frame)
                 self.__windowManager.show(frame)
                 self.__captureManager.exitFrame()
                 self.__windowManager.processEvent()
