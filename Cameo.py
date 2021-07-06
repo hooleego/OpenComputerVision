@@ -9,7 +9,7 @@ class Cameo(object):
         self.__capture = cv2.VideoCapture(videoSource)
         self.__captureManager = CaptureManager(self.__capture, self.__windowManager, True)
         self.__leftButtonClicked = False
-        self.__curveFilter = Filters.BlurFilter()
+        self.__curveFilter = Filters.EmbossFilter()
 
     def run(self):
         """ Run the main loop """

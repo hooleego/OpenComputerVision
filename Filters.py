@@ -1,6 +1,5 @@
 import cv2
 import numpy
-import Utils
 
 
 def strokeEdges(src, dst, blurKsize=7, edgeKsize=5):
@@ -15,7 +14,7 @@ def strokeEdges(src, dst, blurKsize=7, edgeKsize=5):
     :return:
     """
     if blurKsize >= 3:
-        # 模糊处理
+        # 模糊处理，为防止将噪声错误地识别为边缘
         blurredSrc = cv2.medianBlur(src, blurKsize)
         graySrc = cv2.cvtColor(blurredSrc, cv2.COLOR_BGR2GRAY)
     else:
@@ -85,28 +84,9 @@ class EmbossFilter(VConvolutionFilter):
         VConvolutionFilter.__init__(self, kernel)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    img = cv2.imread('Images/river.jpg')
+    strokeEdges(img, img, blurKsize=7)
+    cv2.imshow('边缘检测', img)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
