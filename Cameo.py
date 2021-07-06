@@ -52,4 +52,3 @@ class Cameo(object):
 
 if __name__ == "__main__":
     Cameo(0).run()
-
